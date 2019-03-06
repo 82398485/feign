@@ -1,0 +1,10 @@
+# Eureka相关
+eureka:
+  client:
+    serviceUrl:
+      #defaultZone: http://172.20.126.14:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/
+  instance:
+    prefer-ip-address: true
+    #SpringBoot 2.0以后获取IP需要修改为spring.cloud.client.ip-address
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

@@ -1,0 +1,11 @@
+#port
+server:
+  port: 9099
+info:
+  version: @project.version@
+spring:
+  application:
+    name: microservice-songcj-feign-server
+management:
+  security:
+    enabled: false

@@ -1,0 +1,46 @@
+server:
+  port: 8761
+eureka:
+  datacenter: zlst
+  environment: develop
+  instance:
+    #以ip的方式注册
+#    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # 心跳间隔
+    lease-renewal-interval-in-seconds: 15
+    # 服务失效时间： 如果多久没有收到请求，则可以删除服务
+    lease-expiration-duration-in-seconds: 45
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/info
+  server:
+    #eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒
+    eviction-interval-timer-in-ms: 30000
+    #设为false关闭自我保护
+    enable-self-preservation: false
+    # 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务
+    wait-time-in-ms-when-sync-empty: 0
+    # 集群之间相互更新节点信息的时间频率
+    peer-eureka-nodes-update-interval-ms: 60000
+    # Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用
+    # renewal-percent-threshold:0.1
+  client:
+    #注册自身到eureka服务器
+    register-with-eureka: true
+    #表示是否从eureka服务器获取注册信息
+    fetch-registry: true
+    #eureka server对客户端健康检测的方式用actuator的/health端点来检测
+    healthcheck:
+      enabled: false
+    # 客户端从Eureka Server集群里更新Eureka Server信息的频率
+    eureka-service-url-poll-interval-seconds: 60
+    # 定义从注册中心获取注册服务的信息
+    registry-fetch-interval-seconds: 5
+management:
+  security:
+    enabled: false
+## log配置
+#logging:
+#  level: info
+spring:
+  application:
+    name: microservice-eureka-server
